@@ -13,11 +13,16 @@ public class WeekdayModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "weekday_id")
     private Long id;
     @Enumerated(EnumType.STRING)
     private Weekday weekday;
 
     public WeekdayModel() {
+    }
+
+    public WeekdayModel(Weekday weekday) {
+        this.weekday = weekday;
     }
 
     public Long getId() {

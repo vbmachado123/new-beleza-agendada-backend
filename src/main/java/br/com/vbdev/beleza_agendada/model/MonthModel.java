@@ -21,6 +21,10 @@ public class MonthModel implements Serializable {
     public MonthModel() {
     }
 
+    public MonthModel(Month month) {
+        this.month = month;
+    }
+
     public Long getId() {
         return id;
     }

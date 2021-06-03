@@ -21,7 +21,7 @@ public class BeautySalonModel  implements Serializable {
     private String description; // Breve descrição do salão
     private String login;
     private String password;
-    private String qr_code; //Código de associação do salão
+    private String qrCode; //Código de associação do salão
     private String image_path; // Logo Image
 
     public BeautySalonModel() {
@@ -91,12 +91,12 @@ public class BeautySalonModel  implements Serializable {
         this.password = password;
     }
 
-    public String getQr_code() {
-        return qr_code;
+    public String getQrCode() {
+        return qrCode;
     }
 
-    public void setQr_code(String qr_code) {
-        this.qr_code = qr_code;
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
     public String getImage_path() {
@@ -112,11 +112,11 @@ public class BeautySalonModel  implements Serializable {
         if (this == o) return true;
         if (!(o instanceof BeautySalonModel)) return false;
         BeautySalonModel that = (BeautySalonModel) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getCnpj(), that.getCnpj()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getLogin(), that.getLogin()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getQr_code(), that.getQr_code()) && Objects.equals(getImage_path(), that.getImage_path());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getCnpj(), that.getCnpj()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getLogin(), that.getLogin()) && Objects.equals(getPassword(), that.getPassword()) && Objects.equals(getQrCode(), that.getQrCode()) && Objects.equals(getImage_path(), that.getImage_path());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCnpj(), getEmail(), getAddress(), getDescription(), getLogin(), getPassword(), getQr_code(), getImage_path());
+        return Objects.hash(getId(), getName(), getCnpj(), getEmail(), getAddress(), getDescription(), getLogin(), getPassword(), getQrCode(), getImage_path());
     }
 }
