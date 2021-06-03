@@ -24,8 +24,9 @@ public class OpeningHoursBeautySalonModel implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private BeautySalonModel beauty_salon;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+   // @OneToMany(mappedBy = "id", fetch = FetchType.EAGER,
+     //       orphanRemoval = true, cascade = CascadeType.ALL)
     private List<WeekdayModel> weekday;
 
     public OpeningHoursBeautySalonModel() {

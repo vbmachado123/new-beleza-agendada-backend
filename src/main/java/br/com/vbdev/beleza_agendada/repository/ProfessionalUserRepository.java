@@ -4,6 +4,10 @@ import br.com.vbdev.beleza_agendada.model.ProfessionalUserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ProfessionalUserRepository extends JpaRepository<ProfessionalUserModel, Long> {
+
+    Optional<ProfessionalUserModel> findByqrCode(String qr_code);
 }

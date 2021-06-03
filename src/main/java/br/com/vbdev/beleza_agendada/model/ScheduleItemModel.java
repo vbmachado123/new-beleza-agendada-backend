@@ -24,7 +24,7 @@ public class ScheduleItemModel implements Serializable {
      * Primeiro item não é dependente de ninguem, é isolado
      * todos posteriores recebem o id do item agendado (principal)
      * */
-    private Long dependencyId;
+    private Long dependencyId; // Refere-se ao id de ScheduleItem
     private boolean reschedule;
     private boolean executed;
     private boolean active;

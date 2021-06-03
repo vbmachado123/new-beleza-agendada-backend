@@ -22,6 +22,8 @@ public class ProfessionalUserModel implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private BeautySalonModel beauty_salon;
 
+    private String qrCode;
+
     public ProfessionalUserModel() {
     }
 
@@ -49,16 +51,25 @@ public class ProfessionalUserModel implements Serializable {
         this.beauty_salon = beauty_salon;
     }
 
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ProfessionalUserModel)) return false;
         ProfessionalUserModel that = (ProfessionalUserModel) o;
-        return Objects.equals(id, that.id) && Objects.equals(user, that.user) && Objects.equals(beauty_salon, that.beauty_salon);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getUser(), that.getUser()) && Objects.equals(getBeauty_salon(), that.getBeauty_salon()) && Objects.equals(getQrCode(), that.getQrCode());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, beauty_salon);
+        return Objects.hash(getId(), getUser(), getBeauty_salon(), getQrCode());
     }
 }
