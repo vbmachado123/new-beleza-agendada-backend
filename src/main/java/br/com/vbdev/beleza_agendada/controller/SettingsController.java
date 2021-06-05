@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("api/v1/settings")
+@RequestMapping("/api/v1/settings")
 public class SettingsController {
 
     @Autowired
     private SettingsService settingsService;
 
+    /**
     @PostMapping("/add/weekday")
     public List<WeekdayModel> addWeekday() {
         return settingsService.addWeekday();
@@ -26,4 +27,5 @@ public class SettingsController {
     public List<MonthModel> addMonths() {
         return settingsService.addMonths();
     }
+    */
 }
