@@ -15,7 +15,7 @@ public class UserTypeModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    private UserType user_type; // Client or Professional
+    private UserType userType; // Client or Professional
 
     public UserTypeModel() {
     }
@@ -29,11 +29,11 @@ public class UserTypeModel implements Serializable {
     }
 
     public UserType getUser_type() {
-        return user_type;
+        return userType;
     }
 
     public void setUser_type(UserType user_type) {
-        this.user_type = user_type;
+        this.userType = user_type;
     }
 
     @Override

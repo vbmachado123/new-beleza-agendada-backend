@@ -17,7 +17,6 @@ public class UserForm {
     private AddressForm address;
 
     private UserTypeForm userType;
-    private String login;
     private String image_path;
 
     public Long getId() {
@@ -90,14 +89,6 @@ public class UserForm {
 
     public void setUserType(UserTypeForm userType) {
         this.userType = userType;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getImage_path() {

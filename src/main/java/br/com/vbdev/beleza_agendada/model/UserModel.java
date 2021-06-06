@@ -2,23 +2,22 @@ package br.com.vbdev.beleza_agendada.model;
 
 
 import br.com.vbdev.beleza_agendada.model.types.LoginType;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
-public class UserModel implements Serializable {
+public class UserModel implements Serializable, UserDetails {
     private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String email;
-    private String password;
+
     private String phone;
     private Date birth_date;
     @Enumerated(EnumType.STRING)
@@ -36,6 +35,42 @@ public class UserModel implements Serializable {
 
     public UserModel() {
     }
+    @Column(name = "user_name", unique = true)
+    private String userName;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "account_non_expired")
+    private Boolean accountNonExpired;
+
+    @Column(name = "account_non_locked")
+    private Boolean accountNonLocked;
+
+    @Column(name = "credentials_non_expired")
+    private Boolean credentialsNonExpired;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_permission", joinColumns = { @JoinColumn (name = "id_user") },
+//            inverseJoinColumns = { @JoinColumn (name = "id_permission")})
+    @OneToMany(fetch = FetchType.LAZY,
+             cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id", referencedColumnName = "id")
+    private List<PermissionModel> permissions;
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        for (PermissionModel permission : this.permissions) {
+            roles.add(permission.getDescription());
+        }
+        return roles;
+    }
 
     public Long getId() {
         return id;
@@ -43,30 +78,6 @@ public class UserModel implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -85,6 +96,14 @@ public class UserModel implements Serializable {
         this.birth_date = birth_date;
     }
 
+    public LoginType getLogintype() {
+        return logintype;
+    }
+
+    public void setLogintype(LoginType logintype) {
+        this.logintype = logintype;
+    }
+
     public AddressModel getAddress() {
         return address;
     }
@@ -101,12 +120,12 @@ public class UserModel implements Serializable {
         this.userType = userType;
     }
 
-    public LoginType getLogintype() {
-        return logintype;
+    public String getLogin() {
+        return login;
     }
 
-    public void setLogintype(LoginType logintype) {
-        this.logintype = logintype;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getImage_path() {
@@ -117,24 +136,98 @@ public class UserModel implements Serializable {
         this.image_path = image_path;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<PermissionModel> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<PermissionModel> permissions) {
+        this.permissions = permissions;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserModel)) return false;
-        UserModel userModel = (UserModel) o;
-        return Objects.equals(getId(), userModel.getId()) && Objects.equals(getName(), userModel.getName()) && Objects.equals(getEmail(), userModel.getEmail()) && Objects.equals(getPassword(), userModel.getPassword()) && Objects.equals(getPhone(), userModel.getPhone()) && Objects.equals(getBirth_date(), userModel.getBirth_date()) && getLogintype() == userModel.getLogintype() && Objects.equals(getAddress(), userModel.getAddress()) && Objects.equals(getUserType(), userModel.getUserType()) && Objects.equals(getLogin(), userModel.getLogin()) && Objects.equals(getImage_path(), userModel.getImage_path());
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getPassword(), getPhone(), getBirth_date(), getLogintype(), getAddress(), getUserType(), getLogin(), getImage_path());
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }
