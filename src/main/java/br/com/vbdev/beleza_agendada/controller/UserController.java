@@ -19,21 +19,9 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/create")
+    @PostMapping
     @Transactional
-    public UserForm create(@RequestBody @Valid UserForm user) {
-            return service.createUser(user);
-    }
-
-    @GetMapping("/{id}")
-    @Transactional
-    public UserForm getUser(@PathVariable @Valid Long id) {
-        return service.getUser(id);
-    }
-
-    @GetMapping
-    @Transactional
-    public List<UserForm> getAll(){
-        return service.getAll();
+    public String create(@RequestBody @Valid UserForm user) {
+        return service.create(user);
     }
 }

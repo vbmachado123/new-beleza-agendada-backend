@@ -2,6 +2,7 @@ package br.com.vbdev.beleza_agendada.controller;
 
 import br.com.vbdev.beleza_agendada.model.form.BeautySalonForm;
 import br.com.vbdev.beleza_agendada.service.BeautySalonService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
+@Api(tags = "BeautySalonEndpoint")
 @Controller
 @RequestMapping("/api/v1/beauty_salon")
 public class BeautySalonController {

@@ -14,15 +14,15 @@ public class UserConverter {
         AddressForm addressForm = new AddressForm();
         UserTypeForm userTypeForm = new UserTypeForm();
         userForm.setId(user.getId());
-     //   System.out.println(user.getLogin());
+
         //Converter UserModel para UserForm
-        userForm.setName(user.getName());
-        userForm.setEmail(user.getEmail());
+
+        userForm.setEmail(user.getUsername());
+        userForm.setName(user.getFullName());
         userForm.setPhone(user.getPhone());
-        userForm.setBirth_date(user.getBirth_date()); // TODO Talvez seja necessário converter aqui
+        userForm.setBirth_date(user.getBirth_date());
 
         userForm.setImage_path(user.getImage_path());
-        userForm.setLogin(user.getLogin());
 
         //Converter AddressModel para AddressForm
         addressForm.setAddress(user.getAddress().getAddress());
@@ -30,8 +30,6 @@ public class UserConverter {
         addressForm.setZip_code(user.getAddress().getZip_code());
         userForm.setAddress(addressForm);
 
-     //   System.out.println(user.getAddress().getAddress());
-     //   System.out.println(user.getUserType().getUser_type());
         //Converter UserTypeModel para UserTypeForm
         userTypeForm.setUser_type(user.getUserType().getUser_type());
 
@@ -46,30 +44,26 @@ public class UserConverter {
         AddressModel addressModel = new AddressModel();
         UserTypeModel userTypeModel = new UserTypeModel();
         //Converter UserForm para UserModel
-        userModel.setName(user.getName());
-        userModel.setEmail(user.getEmail());
-        userModel.setPassword(user.getPassword()); //TODO Precisa Criptografar senha
+
         userModel.setPhone(user.getPhone());
-        userModel.setBirth_date(user.getBirth_date()); // TODO Talvez seja necessário converter aqui
+        userModel.setBirth_date(user.getBirth_date());
 
         userModel.setImage_path(user.getImage_path());
-        userModel.setLogin(user.getLogin());
+//        userModel.setLogin(user.getLogin());
 
         //Converter AddressForm para AddressModel
         addressModel.setAddress(user.getAddress().getAddress());
         addressModel.setDistrict(user.getAddress().getDistrict());
         addressModel.setZip_code(user.getAddress().getZip_code());
 
-        // addressRepository.save(addressModel);
         userModel.setAddress(addressModel);
 
         //Converter UserTypeForm para UserTypeModel
         userTypeModel.setUser_type(user.getUserType().getUser_type());
 
-        //userTypeRepository.save(userTypeModel);
         userModel.setUserType(userTypeModel);
         userModel.setLogintype(user.getLogintype());
-        // userRepository.save(userModel);
+
         return userModel;
     }
 
