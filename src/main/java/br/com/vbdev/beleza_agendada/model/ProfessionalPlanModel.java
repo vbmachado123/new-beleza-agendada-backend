@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +24,12 @@ public class ProfessionalPlanModel implements Serializable {
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     private PlanModel plan;
-    private Date initial_date; //Data inicial do plano
-    private Date final_date; //Data final (vencimento) do plano
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime initial_date; //Data inicial do plano
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime final_date; //Data final (vencimento) do plano
     private boolean active;
 
     public ProfessionalPlanModel() {
@@ -52,19 +59,19 @@ public class ProfessionalPlanModel implements Serializable {
         this.plan = plan;
     }
 
-    public Date getInitial_date() {
+    public DateTime getInitial_date() {
         return initial_date;
     }
 
-    public void setInitial_date(Date initial_date) {
+    public void setInitial_date(DateTime initial_date) {
         this.initial_date = initial_date;
     }
 
-    public Date getFinal_date() {
+    public DateTime getFinal_date() {
         return final_date;
     }
 
-    public void setFinal_date(Date final_date) {
+    public void setFinal_date(DateTime final_date) {
         this.final_date = final_date;
     }
 

@@ -2,6 +2,8 @@ package br.com.vbdev.beleza_agendada.model;
 
 
 import br.com.vbdev.beleza_agendada.model.types.LoginType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,7 +29,7 @@ public class UserModel implements Serializable, UserDetails {
     @JoinColumn(name="id", referencedColumnName = "id")
     private AddressModel address;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id", referencedColumnName = "id")
     private UserTypeModel userType;
     private String login;
@@ -56,12 +58,12 @@ public class UserModel implements Serializable, UserDetails {
     @Column(name = "enabled")
     private Boolean enabled;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_permission", joinColumns = { @JoinColumn (name = "id_user") },
-//            inverseJoinColumns = { @JoinColumn (name = "id_permission")})
-    @OneToMany(fetch = FetchType.LAZY,
-             cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id", referencedColumnName = "id")
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "user_permission", joinColumns = { @JoinColumn (name = "id_user") },
+            inverseJoinColumns = { @JoinColumn (name = "id_permission")})
+//    @OneToMany(mappedBy = "id", fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL)
     private List<PermissionModel> permissions;
 
     public List<String> getRoles() {

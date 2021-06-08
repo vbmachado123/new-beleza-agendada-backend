@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,7 +29,9 @@ public class ChangeScheduleModel implements Serializable {
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     private ServiceCatalogUserModel service_catalog_user;
-    private Date request_date; //dataHora da solicitação
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime request_date; //dataHora da solicitação
     private String reason;
 
     @OneToOne
@@ -68,11 +73,11 @@ public class ChangeScheduleModel implements Serializable {
         this.service_catalog_user = service_catalog_user;
     }
 
-    public Date getRequest_date() {
+    public DateTime getRequest_date() {
         return request_date;
     }
 
-    public void setRequest_date(Date request_date) {
+    public void setRequest_date(DateTime request_date) {
         this.request_date = request_date;
     }
 

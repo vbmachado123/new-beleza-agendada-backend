@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +22,9 @@ public class ScheduleItemModel implements Serializable {
     private ScheduleModel schedule;
     private String note; // Observação
     private boolean available; // Disponivel
-    private Date hour; // horário
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime hour; // horário
     /**
      * Primeiro item não é dependente de ninguem, é isolado
      * todos posteriores recebem o id do item agendado (principal)
@@ -97,11 +102,11 @@ public class ScheduleItemModel implements Serializable {
         this.schedule = schedule;
     }
 
-    public Date getHour() {
+    public DateTime getHour() {
         return hour;
     }
 
-    public void setHour(Date hour) {
+    public void setHour(DateTime hour) {
         this.hour = hour;
     }
 

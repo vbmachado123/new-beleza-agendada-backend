@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -26,8 +29,7 @@ public class ScheduleModel implements Serializable {
             cascade = CascadeType.ALL)
     private List<BreakTimeModel> break_time;
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OpeningHoursBeautySalonModel> opening_hours_beauty_salon;
 
     public ScheduleModel() {

@@ -1,7 +1,13 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,16 +23,19 @@ public class OpeningHoursBeautySalonModel implements Serializable {
 
     private String description;
 
-    private Date initial_hour;
-    private Date final_hour;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime initial_hour; // Formatar para HH:mm
 
-    @OneToOne
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime final_hour; // Formatar para HH:mm
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "id")
     private BeautySalonModel beauty_salon;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-   // @OneToMany(mappedBy = "id", fetch = FetchType.EAGER,
-     //       orphanRemoval = true, cascade = CascadeType.ALL)
+//    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<WeekdayModel> weekday;
 
     public OpeningHoursBeautySalonModel() {
@@ -48,19 +57,19 @@ public class OpeningHoursBeautySalonModel implements Serializable {
         this.description = description;
     }
 
-    public Date getInitial_hour() {
+    public DateTime getInitial_hour() {
         return initial_hour;
     }
 
-    public void setInitial_hour(Date initial_hour) {
+    public void setInitial_hour(DateTime initial_hour) {
         this.initial_hour = initial_hour;
     }
 
-    public Date getFinal_hour() {
+    public DateTime getFinal_hour() {
         return final_hour;
     }
 
-    public void setFinal_hour(Date final_hour) {
+    public void setFinal_hour(DateTime final_hour) {
         this.final_hour = final_hour;
     }
 

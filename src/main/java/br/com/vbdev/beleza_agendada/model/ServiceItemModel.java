@@ -8,11 +8,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "service_item") //atendimento
 public class ServiceItemModel implements Serializable {
+
     private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<AttendanceModel> attendance;

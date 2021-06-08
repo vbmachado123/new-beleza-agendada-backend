@@ -1,6 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
 import br.com.vbdev.beleza_agendada.model.types.FavoriteType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,9 +22,11 @@ public class FavoritesModel implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private UserModel user; // Usuario que favoritou <- Dono da lista
 
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProfessionalUserModel> professional_user; //listagem de profissionais
+
+    @Enumerated(EnumType.STRING)
     private FavoriteType type;
 
     public FavoritesModel() {
