@@ -5,10 +5,13 @@ import br.com.vbdev.beleza_agendada.service.BeautySalonService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.Description;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @Api(tags = "BeautySalonEndpoint")
 @Controller
@@ -18,10 +21,9 @@ public class BeautySalonController {
     @Autowired
     private BeautySalonService service;
 
-    @PostMapping("/create")
-    public String createBeautySalon(@RequestBody BeautySalonForm salonForm) {
-        Long idCreated = service.createBeautySalon(salonForm);
-        return idCreated.toString();
+    @PostMapping
+    public ResponseEntity createBeautySalon(@RequestBody BeautySalonForm salonForm) {
+        return ok(service.createBeautySalon(salonForm));
     }
 
     @GetMapping("/{id}")

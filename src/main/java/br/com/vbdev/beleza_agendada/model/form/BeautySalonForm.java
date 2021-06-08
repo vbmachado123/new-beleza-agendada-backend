@@ -1,5 +1,7 @@
 package br.com.vbdev.beleza_agendada.model.form;
 
+import java.util.List;
+
 public class BeautySalonForm {
 
     private Long id;
@@ -13,6 +15,8 @@ public class BeautySalonForm {
     private String password;
     private String qrCode; //Código de associação do salão
     private String image_path; // Logo Image
+
+    private List<OpenHoursBeautySalonForm> openHoursBeautySalonFormList;
 
     public Long getId() {
         return id;
@@ -92,5 +96,13 @@ public class BeautySalonForm {
 
     public void setImage_path(String image_path) {
         this.image_path = image_path;
+    }
+
+    public List<OpenHoursBeautySalonForm> getOpenHoursBeautySalonFormList() {
+        return openHoursBeautySalonFormList;
+    }
+
+    public void setOpenHoursBeautySalonFormList(List<OpenHoursBeautySalonForm> openHoursBeautySalonFormList) {
+        this.openHoursBeautySalonFormList = openHoursBeautySalonFormList;
     }
 }

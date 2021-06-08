@@ -9,13 +9,10 @@ public class BeautySalonConverter {
     public static BeautySalonModel toModel(BeautySalonForm salonForm) {
         AddressModel addressModel = new AddressModel();
         BeautySalonModel beautySalonModel = new BeautySalonModel();
-
-        beautySalonModel.setName(salonForm.getName());
+        beautySalonModel.setUserName(salonForm.getEmail());
+        beautySalonModel.setBeautySalonName(salonForm.getName());
         beautySalonModel.setCnpj(salonForm.getCnpj());
-        beautySalonModel.setEmail(salonForm.getEmail());
         beautySalonModel.setDescription(salonForm.getDescription());
-        beautySalonModel.setLogin(salonForm.getLogin());
-        beautySalonModel.setPassword(salonForm.getPassword());
         beautySalonModel.setImage_path(salonForm.getImage_path());
 
         addressModel.setAddress(salonForm.getAddress().getAddress());

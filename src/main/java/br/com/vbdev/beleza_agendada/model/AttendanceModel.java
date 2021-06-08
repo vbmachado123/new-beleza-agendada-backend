@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,8 +18,12 @@ public class AttendanceModel implements Serializable {
     private Long id;
     private ScheduleItemModel agenda_item;
     private ServiceCatalogModel service_catalog;
-    private Date initial_hour;
-    private Date final_hour;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime initial_hour;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime final_hour;
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
@@ -51,19 +58,19 @@ public class AttendanceModel implements Serializable {
         this.service_catalog = service_catalog;
     }
 
-    public Date getInitial_hour() {
+    public DateTime getInitial_hour() {
         return initial_hour;
     }
 
-    public void setInitial_hour(Date initial_hour) {
+    public void setInitial_hour(DateTime initial_hour) {
         this.initial_hour = initial_hour;
     }
 
-    public Date getFinal_hour() {
+    public DateTime getFinal_hour() {
         return final_hour;
     }
 
-    public void setFinal_hour(Date final_hour) {
+    public void setFinal_hour(DateTime final_hour) {
         this.final_hour = final_hour;
     }
 

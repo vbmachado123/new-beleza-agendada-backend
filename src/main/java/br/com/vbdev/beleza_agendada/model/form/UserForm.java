@@ -19,6 +19,8 @@ public class UserForm {
     private UserTypeForm userType;
     private String image_path;
 
+    private String salonCode;
+
     public Long getId() {
         return id;
     }
@@ -97,5 +99,13 @@ public class UserForm {
 
     public void setImage_path(String image_path) {
         this.image_path = image_path;
+    }
+
+    public String getSalonCode() {
+        return salonCode;
+    }
+
+    public void setSalonCode(String salonCode) {
+        this.salonCode = salonCode;
     }
 }

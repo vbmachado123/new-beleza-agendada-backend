@@ -1,9 +1,12 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,11 +16,16 @@ public class PermissionModel implements GrantedAuthority, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "permissions")
+//    @LazyCollection(LazyCollectionOption.FALSE)
+    List<UserModel> users;
 
     @Override
     public String getAuthority() {
@@ -39,6 +47,14 @@ public class PermissionModel implements GrantedAuthority, Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<UserModel> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserModel> users) {
+        this.users = users;
     }
 
     @Override

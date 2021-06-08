@@ -14,7 +14,9 @@ public class UserTypeModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_type")
     private UserType userType; // Client or Professional
 
     public UserTypeModel() {

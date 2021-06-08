@@ -21,7 +21,8 @@ public class ServiceCatalogUserModel implements Serializable {
     private ProfessionalUserModel professional_user;
     private int multiplier_time_schedule; // Quantos tempos da agenda o serviço ocupa
 
-
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private ReschedulingTimeModel rescheduling_time;
 
     public ServiceCatalogUserModel() {

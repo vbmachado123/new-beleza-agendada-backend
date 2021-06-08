@@ -1,5 +1,8 @@
 package br.com.vbdev.beleza_agendada.model;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +17,9 @@ public class ReschedulingTimeModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private Date schedules;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime schedules;
 
     public ReschedulingTimeModel() {
     }
@@ -35,11 +40,11 @@ public class ReschedulingTimeModel implements Serializable {
         this.description = description;
     }
 
-    public Date getSchedules() {
+    public DateTime getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(Date schedules) {
+    public void setSchedules(DateTime schedules) {
         this.schedules = schedules;
     }
 

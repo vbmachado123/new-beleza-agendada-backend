@@ -22,16 +22,15 @@ public class SwaggerConfigurations {
                 .apis(RequestHandlerSelectors.basePackage("br.com.vbdev"))
                 .paths(PathSelectors.ant("/**"))
                 .build()
-                .ignoredParameterTypes(UserModel.class);
-
-       /**         .globalOperationParameters(Arrays.asList(
+                .ignoredParameterTypes(UserModel.class)
+                .globalOperationParameters(Arrays.asList(
                         new ParameterBuilder()
                                 .name("Authorization")
                                 .description("Header para o token JWT")
                                 .modelRef(new ModelRef("string"))
                                 .parameterType("header")
                                 .required(false)
-                                .build())); */
+                                .build()));
     }
 
 }
