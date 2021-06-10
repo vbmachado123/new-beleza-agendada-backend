@@ -31,7 +31,7 @@ public class OpeningHoursBeautySalonModel implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "id")
-    private BeautySalonModel beauty_salon;
+    private BeautySalonModel beautySalon;
 
 //    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -73,12 +73,12 @@ public class OpeningHoursBeautySalonModel implements Serializable {
         this.final_hour = final_hour;
     }
 
-    public BeautySalonModel getBeauty_salon() {
-        return beauty_salon;
+    public BeautySalonModel getBeautySalon() {
+        return beautySalon;
     }
 
-    public void setBeauty_salon(BeautySalonModel beauty_salon) {
-        this.beauty_salon = beauty_salon;
+    public void setBeautySalon(BeautySalonModel beautySalon) {
+        this.beautySalon = beautySalon;
     }
 
     public List<WeekdayModel> getWeekday() {
@@ -94,11 +94,11 @@ public class OpeningHoursBeautySalonModel implements Serializable {
         if (this == o) return true;
         if (!(o instanceof OpeningHoursBeautySalonModel)) return false;
         OpeningHoursBeautySalonModel that = (OpeningHoursBeautySalonModel) o;
-        return Objects.equals(id, that.id) && Objects.equals(description, that.description) && Objects.equals(initial_hour, that.initial_hour) && Objects.equals(final_hour, that.final_hour) && Objects.equals(beauty_salon, that.beauty_salon) && Objects.equals(weekday, that.weekday);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getInitial_hour(), that.getInitial_hour()) && Objects.equals(getFinal_hour(), that.getFinal_hour()) && Objects.equals(getBeautySalon(), that.getBeautySalon()) && Objects.equals(getWeekday(), that.getWeekday());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, initial_hour, final_hour, beauty_salon, weekday);
+        return Objects.hash(getId(), getDescription(), getInitial_hour(), getFinal_hour(), getBeautySalon(), getWeekday());
     }
 }

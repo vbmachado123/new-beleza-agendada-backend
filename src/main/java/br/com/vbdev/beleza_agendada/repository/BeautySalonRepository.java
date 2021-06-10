@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface BeautySalonRepository extends JpaRepository<BeautySalonModel, Long> {
+
     Optional<BeautySalonModel> findByqrCode(String qr_code);
 
     @Query("SELECT b FROM BeautySalonModel b WHERE b.userName =:userName")

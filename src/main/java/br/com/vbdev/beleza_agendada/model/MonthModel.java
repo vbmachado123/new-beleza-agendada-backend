@@ -18,6 +18,8 @@ public class MonthModel implements Serializable {
     @Enumerated(EnumType.STRING)
     private Month month; // Mês
 
+    private int year;
+
     public MonthModel() {
     }
 
@@ -41,16 +43,24 @@ public class MonthModel implements Serializable {
         this.month = month;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MonthModel)) return false;
         MonthModel that = (MonthModel) o;
-        return id.equals(that.id) && month == that.month;
+        return getYear() == that.getYear() && Objects.equals(getId(), that.getId()) && getMonth() == that.getMonth();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, month);
+        return Objects.hash(getId(), getMonth(), getYear());
     }
 }

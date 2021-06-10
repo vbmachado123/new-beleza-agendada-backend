@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "agenda_item")
 public class ScheduleItemModel implements Serializable {
+
     private static final Long serialVersionUID = 1L;
 
     @Id
@@ -26,7 +27,7 @@ public class ScheduleItemModel implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime hour; // horário
     /**
-     * Primeiro item não é dependente de ninguem, é isolado
+     * Primeiro item não é dependente de ninguém, é isolado
      * todos posteriores recebem o id do item agendado (principal)
      * */
     private Long dependencyId; // Refere-se ao id de ScheduleItem

@@ -1,5 +1,6 @@
 package br.com.vbdev.beleza_agendada.controller;
 
+import br.com.vbdev.beleza_agendada.model.form.BreakTimeForm;
 import br.com.vbdev.beleza_agendada.model.form.ScheduleForm;
 import br.com.vbdev.beleza_agendada.service.ProfessionalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,15 @@ public class ProfessionalController {
     @Autowired
     private ProfessionalService service;
 
-    @PostMapping("/create_schedule")
+    @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity create_schedule(@RequestBody @Valid ScheduleForm form){
-        return ok(service.create_schedule(form));
+    public void create(){
+
+    }
+
+    @PostMapping("/create/break_time")
+    @ResponseBody
+    public ResponseEntity create_breakTime(@RequestBody @Valid BreakTimeForm form) {
+        return ok(service.create_breakTime(form));
     }
 }

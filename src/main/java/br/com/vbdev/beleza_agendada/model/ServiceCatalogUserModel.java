@@ -13,12 +13,20 @@ public class ServiceCatalogUserModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private ServiceCatalogModel service_catalog;
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private ScheduleTimeModel scheduling_time;
+
     private double value;
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     private ProfessionalUserModel professional_user;
+
     private int multiplier_time_schedule; // Quantos tempos da agenda o serviço ocupa
 
     @OneToOne
@@ -76,16 +84,24 @@ public class ServiceCatalogUserModel implements Serializable {
         this.rescheduling_time = rescheduling_time;
     }
 
+    public ScheduleTimeModel getScheduling_time() {
+        return scheduling_time;
+    }
+
+    public void setScheduling_time(ScheduleTimeModel scheduling_time) {
+        this.scheduling_time = scheduling_time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ServiceCatalogUserModel)) return false;
         ServiceCatalogUserModel that = (ServiceCatalogUserModel) o;
-        return Double.compare(that.value, value) == 0 && multiplier_time_schedule == that.multiplier_time_schedule && Objects.equals(id, that.id) && Objects.equals(service_catalog, that.service_catalog) && Objects.equals(professional_user, that.professional_user) && Objects.equals(rescheduling_time, that.rescheduling_time);
+        return Double.compare(that.getValue(), getValue()) == 0 && getMultiplier_time_schedule() == that.getMultiplier_time_schedule() && Objects.equals(getId(), that.getId()) && Objects.equals(getService_catalog(), that.getService_catalog()) && Objects.equals(getScheduling_time(), that.getScheduling_time()) && Objects.equals(getProfessional_user(), that.getProfessional_user()) && Objects.equals(getRescheduling_time(), that.getRescheduling_time());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, service_catalog, value, professional_user, multiplier_time_schedule, rescheduling_time);
+        return Objects.hash(getId(), getService_catalog(), getScheduling_time(), getValue(), getProfessional_user(), getMultiplier_time_schedule(), getRescheduling_time());
     }
 }
