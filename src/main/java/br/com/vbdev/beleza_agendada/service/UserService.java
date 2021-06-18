@@ -1,12 +1,10 @@
 package br.com.vbdev.beleza_agendada.service;
 
-import br.com.vbdev.beleza_agendada.controller.ProfessionalController;
 import br.com.vbdev.beleza_agendada.converter.UserConverter;
 import br.com.vbdev.beleza_agendada.model.*;
 import br.com.vbdev.beleza_agendada.model.form.AddressForm;
 import br.com.vbdev.beleza_agendada.model.form.UserForm;
 import br.com.vbdev.beleza_agendada.model.form.UserTypeForm;
-import br.com.vbdev.beleza_agendada.model.types.LoginType;
 import br.com.vbdev.beleza_agendada.model.types.UserType;
 import br.com.vbdev.beleza_agendada.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +13,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.vbdev.beleza_agendada.util.QrCodeGenerate.generateQrCode;
+
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -57,7 +53,7 @@ public class UserService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         var user = userRepository.findByUsername(userName);
-        if(user != null)
+        if (user != null)
             return (UserDetails) user;
         else
             throw new UsernameNotFoundException("Username " + userName + "Not found");
@@ -91,40 +87,37 @@ public class UserService implements UserDetailsService{
         addressRepository.save(userModel.getAddress());
 
         UserModel created = userRepository.save(userModel);
-        if(userModel.getUserType().getUser_type() == UserType.professional)
+        if (userModel.getUserType().getUser_type() == UserType.professional)
             createProfessionalProfile(user.getSalonCode(), created.getId());
 
 
         return user.getEmail();
     }
 
+    public void deleteUser(UserForm form) {
+
+        userModel = UserConverter.toModel(form);
+        userRepository.delete(userModel);
+
+    }
+
     /**
+     * @param (salonCode,id)
      * @description: Conecta o profissional ao salão selecionado
-     * @param salonCode, id */
+     */
     private void createProfessionalProfile(String salonCode, Long id) {
 
         Optional<BeautySalonModel> beautySalonModelOptional
                 = beautySalonRepository.findByqrCode(salonCode);
 
-        if(beautySalonModelOptional.isPresent())
+        if (beautySalonModelOptional.isPresent())
             beautySalonModel = beautySalonModelOptional.get();
 
         professionalUserModel.setBeauty_salon(beautySalonModel);
-        professionalUserModel.setQrCode(generateQrCode(id));
+        professionalUserModel.setQrCode(generateQrCode(id, "PROF"));
         professionalUserModel.setUser(userModel);
 
         professionalUserRepository.save(professionalUserModel);
-    }
-
-    private String generateQrCode(Long id) {
-
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy");
-        String year = format.format(date);
-
-        String qrCode = "#PROF" + year + id.toString();
-        System.out.println(qrCode);
-        return qrCode;
     }
 
     public List<UserForm> getAll() {
@@ -132,7 +125,7 @@ public class UserService implements UserDetailsService{
         List<UserForm> userForms = new ArrayList<>();
         List<UserModel> userModels = userRepository.findAll();
 
-        for(UserModel u : userModels) {
+        for (UserModel u : userModels) {
 
             UserForm userForm = new UserForm();
             userForm.setName(u.getUsername());
@@ -141,17 +134,14 @@ public class UserService implements UserDetailsService{
             addressForm.setAddress(u.getAddress().getAddress());
             userForm.setAddress(addressForm);
 
-//            System.out.println(u.getUserType().getUser_type());
-
             UserTypeForm userTypeForm = new UserTypeForm();
 //            userTypeForm.setUser_type(u.getUserType().getUser_type());
 
 //            userForm.setUserType(userTypeForm);
-//            System.out.println(userForm.getUserType().getUser_type());
 
             userForms.add(userForm);
-            System.out.println(userForm.getAddress().getAddress());
-            System.out.println(userForm.getName());
+//            System.out.println(userForm.getAddress().getAddress());
+//            System.out.println(userForm.getName());
         }
 
         return userForms;

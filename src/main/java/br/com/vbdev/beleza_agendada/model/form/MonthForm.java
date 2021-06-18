@@ -10,6 +10,8 @@ public class MonthForm {
 
     private Month month;
 
+    private int year;
+
     public Long getId() {
         return id;
     }
@@ -24,5 +26,13 @@ public class MonthForm {
 
     public void setMonth(Month month) {
         this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

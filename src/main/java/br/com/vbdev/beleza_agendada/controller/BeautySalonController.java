@@ -26,6 +26,8 @@ public class BeautySalonController {
         return ok(service.createBeautySalon(salonForm));
     }
 
+
+
     @GetMapping("/{id}")
     public BeautySalonForm findById(@RequestParam @Valid Long id) {
         return service.findById(id);

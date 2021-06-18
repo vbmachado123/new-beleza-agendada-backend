@@ -24,6 +24,13 @@
 
 	<dependencies>
 
+		<!-- API Pagamentos -->
+		<dependency>
+			<groupId>com.mercadopago</groupId>
+			<artifactId>sdk-java</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
 		<!-- Spring Security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

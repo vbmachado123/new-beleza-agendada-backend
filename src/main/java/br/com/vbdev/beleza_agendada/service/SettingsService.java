@@ -29,7 +29,7 @@ public class SettingsService {
         weekdays = new ArrayList<>();
         addWeekdayList();
 
-        for(WeekdayModel day : weekdays) {
+        for (WeekdayModel day : weekdays) {
             System.out.println(day.getWeekday());
             weekdayRepository.save(day);
         }
@@ -46,7 +46,7 @@ public class SettingsService {
         days.add(Weekday.thursday);
         days.add(Weekday.friday);
         days.add(Weekday.saturday);
-        for(Weekday e : days) {
+        for (Weekday e : days) {
             //System.out.println(day.getWeekday());
             //weekdayModel.setWeekday(e);
             weekdays.add(new WeekdayModel(e));
@@ -57,7 +57,7 @@ public class SettingsService {
         months = new ArrayList<>();
         addMonthList();
 
-        for(MonthModel month : months) {
+        for (MonthModel month : months) {
             System.out.println(month.getMonth());
             monthRepository.save(month);
         }
@@ -80,7 +80,7 @@ public class SettingsService {
         m.add(Month.november);
         m.add(Month.december);
 
-        for(Month x : m)
+        for (Month x : m)
             months.add(new MonthModel(x));
 
     }
